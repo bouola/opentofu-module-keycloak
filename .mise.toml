@@ -1,0 +1,26 @@
+[tools]
+opentofu = "1.9.0"
+pre-commit = "4.5.1"
+terraform-docs = "0.21.0"
+tflint = "0.51.1"
+trivy = "0.69.2"
+jq = "1.8.1"
+node = "20.11.1"
+
+[tasks."pre-commit"]
+description = "Run pre-commit hooks"
+run = "pre-commit run --all-files"
+
+[tasks.format]
+description = "Run opentofu format"
+run = "tofu fmt --recursive"
+
+[settings]
+trusted_config_paths = ["."]
+experimental = true
+
+[hooks.postinstall]
+script = """
+#!/usr/bin/env bash
+pre-commit install --install-hooks
+"""
