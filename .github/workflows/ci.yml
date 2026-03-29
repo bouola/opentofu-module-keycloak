@@ -13,9 +13,6 @@ on:
       - 'CHANGELOG.md'
       - '.mise.toml'
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 permissions:
   contents: write # to be able to publish a GitHub release
   issues: write # to be able to comment on released issues
@@ -34,6 +31,7 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           experimental: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Format Check
         run: tofu fmt -check -recursive
@@ -60,6 +58,7 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           experimental: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trivy Scan
         run: trivy config . --severity HIGH,CRITICAL
@@ -75,6 +74,7 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           experimental: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Validate
         run: tofu init -backend=false && tofu validate
@@ -99,6 +99,8 @@ jobs:
         run: npm install -g semantic-release @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git
 
       - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ github.ref }}" == "refs/heads/main" ]; then
             npx semantic-release
