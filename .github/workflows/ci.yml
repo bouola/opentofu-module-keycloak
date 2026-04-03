@@ -33,6 +33,7 @@ jobs:
           experimental: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Format Check
         run: tofu fmt -check -recursive
@@ -67,6 +68,7 @@ jobs:
           experimental: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trivy Scan
         run: trivy config . --severity HIGH,CRITICAL
@@ -84,6 +86,7 @@ jobs:
           experimental: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Validate
         run: tofu init -backend=false && tofu validate
