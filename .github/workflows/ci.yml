@@ -31,8 +31,6 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           experimental: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Format Check
         run: tofu fmt -check -recursive
@@ -55,18 +53,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check GitHub API Rate Limit
-        run: |
-          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/rate_limit
-
       - name: Setup Mise
         uses: jdx/mise-action@v2
         with:
           experimental: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # - name: Trivy Scan
   #   run: trivy config . --severity HIGH,CRITICAL
