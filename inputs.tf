@@ -29,8 +29,11 @@ variable "keycloak_realm" {
     access_code_lifespan     = optional(string, "1h")
     ssl_required             = optional(string, "external")
     password_policy          = optional(string, "upperCase(1) and length(10) and forceExpiredPasswordChange(365) and notUsername")
-    internationalization     = optional(map(string), {})
-    security_defenses        = optional(map(string), {})
+    internationalization = optional(object({
+      supported_locales = optional(list(string), ["en", "fr"])
+      default_locale    = optional(string, "en")
+    }))
+    security_defenses = optional(map(string), {})
   })
   description = "Keycloak realm configuration including name, display name, default email domain, and default user groups"
 }

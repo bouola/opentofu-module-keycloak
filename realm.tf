@@ -14,8 +14,8 @@ resource "keycloak_realm" "realm" {
   password_policy = var.keycloak_realm.password_policy
 
   internationalization {
-    supported_locales = lookup(var.keycloak_realm.internationalization, "supported_locales", ["en", "fr"])
-    default_locale    = lookup(var.keycloak_realm.internationalization, "default_locale", "en")
+    supported_locales = var.keycloak_realm.internationalization.supported_locales
+    default_locale    = var.keycloak_realm.internationalization.default_locale
   }
 
   security_defenses {
