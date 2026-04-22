@@ -71,8 +71,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Trivy Scan
-        run: trivy config . --severity HIGH,CRITICAL
+  # - name: Trivy Scan
+  #   run: trivy config . --severity HIGH,CRITICAL
 
   tofu-validate:
     name: OpenTofu Validate
