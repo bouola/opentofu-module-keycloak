@@ -34,6 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MISE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AQUA_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: OpenTofu Format Check
         run: tofu fmt -check -recursive
