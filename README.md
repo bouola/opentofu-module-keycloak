@@ -7,13 +7,15 @@ Keycloak management with OpenTofu
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
-| <a name="requirement_keycloak"></a> [keycloak](#requirement\_keycloak) | >= 5.5.0 |
+| <a name="requirement_keycloak"></a> [keycloak](#requirement\_keycloak) | >= 5.7.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.12.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_keycloak"></a> [keycloak](#provider\_keycloak) | >= 5.5.0 |
+| <a name="provider_keycloak"></a> [keycloak](#provider\_keycloak) | >= 5.7.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | >= 0.12.0 |
 
 ## Modules
 
@@ -34,6 +36,11 @@ No modules.
 | [keycloak_saml_user_attribute_protocol_mapper.saml_user_attribute_mappers](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/saml_user_attribute_protocol_mapper) | resource |
 | [keycloak_user.users](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/user) | resource |
 | [keycloak_user_groups.user_groups](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/user_groups) | resource |
+| [time_sleep.after_groups](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [time_sleep.after_oidc_clients](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [time_sleep.after_realm](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [time_sleep.after_saml_clients](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [time_sleep.after_users](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 
 ## Inputs
 

@@ -42,6 +42,18 @@ resource "keycloak_user" "users" {
       required_actions
     ]
   }
+
+  depends_on = [
+    time_sleep.after_groups
+  ]
+}
+
+resource "time_sleep" "after_users" {
+  depends_on = [
+    keycloak_user.users
+  ]
+
+  create_duration = "30s"
 }
 
 resource "keycloak_user_groups" "user_groups" {
@@ -55,4 +67,8 @@ resource "keycloak_user_groups" "user_groups" {
   ]
   realm_id = keycloak_realm.realm.id
   user_id  = keycloak_user.users[each.key].id
+
+  depends_on = [
+    time_sleep.after_users
+  ]
 }
