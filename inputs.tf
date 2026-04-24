@@ -32,7 +32,7 @@ variable "keycloak_realm" {
     internationalization = optional(object({
       supported_locales = optional(list(string), ["en", "fr"])
       default_locale    = optional(string, "en")
-    }))
+    }), {})
     security_defenses = optional(map(string), {})
   })
   description = "Keycloak realm configuration including name, display name, default email domain, and default user groups"

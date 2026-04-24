@@ -26,6 +26,10 @@ resource "keycloak_group" "level_0" {
   realm_id = keycloak_realm.realm.id
   name     = each.value.name
   # attributes = lookup(each.value, "attributes", null)
+
+  depends_on = [
+    time_sleep.after_realm
+  ]
 }
 
 resource "keycloak_group" "level_1" {
@@ -42,6 +46,10 @@ resource "keycloak_group" "level_2" {
   name      = each.value.name
   parent_id = keycloak_group.level_1[each.value.parent].id
   # attributes = lookup(each.value, "attributes", null)
+  depends_on = [
+    keycloak_group.level_0,
+    keycloak_group.level_1
+  ]
 }
 
 resource "keycloak_group" "level_3" {
@@ -50,6 +58,22 @@ resource "keycloak_group" "level_3" {
   name      = each.value.name
   parent_id = keycloak_group.level_2[each.value.parent].id
   # attributes = lookup(each.value, "attributes", null)
+  depends_on = [
+    keycloak_group.level_0,
+    keycloak_group.level_1,
+    keycloak_group.level_2
+  ]
+}
+
+resource "time_sleep" "after_groups" {
+  depends_on = [
+    keycloak_group.level_0,
+    keycloak_group.level_1,
+    keycloak_group.level_2,
+    keycloak_group.level_3
+  ]
+
+  create_duration = "30s"
 }
 
 locals {

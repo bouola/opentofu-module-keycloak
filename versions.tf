@@ -2,7 +2,11 @@ terraform {
   required_providers {
     keycloak = {
       source  = "keycloak/keycloak"
-      version = ">= 5.5.0"
+      version = ">= 5.7.0"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = ">= 0.12.0"
     }
   }
 

@@ -41,3 +41,8 @@ resource "keycloak_realm" "realm" {
 
   # Manual edit user attributes for disallow user to update some fields
 }
+
+resource "time_sleep" "after_realm" {
+  depends_on      = [keycloak_realm.realm]
+  create_duration = "30s"
+}
