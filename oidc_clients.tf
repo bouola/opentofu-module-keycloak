@@ -42,13 +42,11 @@ resource "keycloak_openid_client" "openid_clients" {
   frontchannel_logout_url     = each.value.frontchannel_logout_url
 
   depends_on = [
-    time_sleep.after_users
+    keycloak_user.users
   ]
 }
 
 resource "time_sleep" "after_oidc_clients" {
-  for_each = keycloak_openid_client.openid_clients
-
   depends_on = [
     keycloak_openid_client.openid_clients
   ]

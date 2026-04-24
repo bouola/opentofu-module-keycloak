@@ -28,13 +28,11 @@ resource "keycloak_saml_client" "saml_clients" {
   front_channel_logout = each.value.front_channel_logout
 
   depends_on = [
-    time_sleep.after_users
+    keycloak_user.users
   ]
 }
 
 resource "time_sleep" "after_saml_clients" {
-  for_each = keycloak_saml_client.saml_clients
-
   depends_on = [
     keycloak_saml_client.saml_clients
   ]
