@@ -26,6 +26,10 @@ resource "keycloak_saml_client" "saml_clients" {
   signature_algorithm = lookup(each.value, "signature_algorithm", null)
   # TODO: set metadata descriptor for the moment manual: Not yet implemented in the provider
   front_channel_logout = each.value.front_channel_logout
+
+  depends_on = [
+    keycloak_user.users
+  ]
 }
 
 resource "time_sleep" "after_saml_clients" {
