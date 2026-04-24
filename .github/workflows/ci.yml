@@ -1,0 +1,115 @@
+name: CI & Release
+
+on:
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - '.mise.toml'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - '.mise.toml'
+
+permissions:
+  contents: write # to be able to publish a GitHub release
+  issues: write # to be able to comment on released issues
+  pull-requests: write # to be able to comment on released pull requests
+  id-token: write # to enable use of OIDC for authentication
+
+jobs:
+  lint:
+    name: Lint & Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
+
+      - name: OpenTofu Format Check
+        run: tofu fmt -check -recursive
+
+      - name: TFLint
+        run: tflint --recursive
+
+      - name: Terraform Docs Check
+        run: |
+          terraform-docs .
+          if [ -n "$(git status --porcelain README.md)" ]; then
+            echo "README.md is out of date. Please run terraform-docs and commit the changes."
+            exit 1
+          fi
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+        with:
+          experimental: true
+
+  # - name: Trivy Scan
+  #   run: trivy config . --severity HIGH,CRITICAL
+
+  tofu-validate:
+    name: OpenTofu Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v4
+        with:
+          experimental: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: OpenTofu Validate
+        run: tofu init -backend=false && tofu validate
+
+  release-dry-run:
+    name: Release (Dry Run)
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+    needs: [lint, security, tofu-validate]
+    runs-on: ubuntu-latest
+    steps: &release_steps
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install dependencies
+        run: npm install -g semantic-release @semantic-release/github @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            npx semantic-release
+          else
+            npx semantic-release --dry-run
+          fi
+
+  release:
+    name: Release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [lint, security, tofu-validate]
+    runs-on: ubuntu-latest
+    steps: *release_steps
