@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.0.1...v1.1.0) (2026-04-30)
+
+
+### Features
+
+* add `full_path` support to OIDC group membership mappers in Keycloak module ([#5](https://github.com/bouola/opentofu-module-keycloak/issues/5)) ([04db2f8](https://github.com/bouola/opentofu-module-keycloak/commit/04db2f848fa472a9c01e155102fd74ea141631c8))
+
 ## [1.0.1](https://github.com/bouola/opentofu-module-keycloak/compare/v1.0.0...v1.0.1) (2026-04-24)
 
 
