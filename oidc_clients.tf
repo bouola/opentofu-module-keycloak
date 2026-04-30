@@ -61,6 +61,7 @@ locals {
         client_name = client.name
         name        = mapper.name
         claim_name  = mapper.claim_name
+        full_path   = mapper.full_path
       }
     ]
   ])
@@ -75,6 +76,7 @@ resource "keycloak_openid_group_membership_protocol_mapper" "group_membership_ma
   client_id  = keycloak_openid_client.openid_clients[each.value.client_name].id
   claim_name = each.value.claim_name
   name       = each.value.name
+  full_path  = each.value.full_path
 
   depends_on = [
     time_sleep.after_oidc_clients
