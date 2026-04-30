@@ -120,6 +120,7 @@ variable "keycloak_oidc_clients" {
     oidc_group_membership_mappers = optional(list(object({
       name       = string
       claim_name = string
+      full_path  = optional(bool)
     })))
   }))
   default     = []
