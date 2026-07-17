@@ -16,7 +16,6 @@ description = "Run opentofu format"
 run = "tofu fmt --recursive"
 
 [settings]
-trusted_config_paths = ["."]
 experimental = true
 lockfile = true
 
