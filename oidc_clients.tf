@@ -65,6 +65,11 @@ locals {
         name        = mapper.name
         claim_name  = mapper.claim_name
         full_path   = mapper.full_path
+
+        add_to_id_token            = mapper.add_to_id_token
+        add_to_access_token        = mapper.add_to_access_token
+        add_to_userinfo            = mapper.add_to_userinfo
+        add_to_token_introspection = mapper.add_to_token_introspection
       }
     ]
   ])
@@ -81,6 +86,11 @@ resource "keycloak_openid_group_membership_protocol_mapper" "group_membership_ma
   name       = each.value.name
   full_path  = each.value.full_path
 
+  add_to_id_token            = each.value.add_to_id_token
+  add_to_access_token        = each.value.add_to_access_token
+  add_to_userinfo            = each.value.add_to_userinfo
+  add_to_token_introspection = each.value.add_to_token_introspection
+
   depends_on = [
     time_sleep.after_oidc_clients
   ]
@@ -96,11 +106,13 @@ resource "keycloak_openid_user_session_note_protocol_mapper" "identity_provider_
   client_id = keycloak_openid_client.openid_clients[each.key].id
   name      = "identity-provider-mapper"
 
-  claim_name          = "identity_provider"
-  claim_value_type    = "String"
-  session_note        = "identity_provider"
-  add_to_id_token     = true
-  add_to_access_token = true
+  claim_name                 = "identity_provider"
+  claim_value_type           = "String"
+  session_note               = "identity_provider"
+  add_to_id_token            = true
+  add_to_access_token        = true
+  add_to_userinfo            = true
+  add_to_token_introspection = true
 
   depends_on = [
     time_sleep.after_oidc_clients
