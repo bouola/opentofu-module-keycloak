@@ -25,22 +25,50 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [keycloak_authentication_bindings.bindings](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_bindings) | resource |
+| [keycloak_authentication_execution.browser_mfa_cookie](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.browser_mfa_idp_redirector](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.browser_mfa_otp](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.browser_mfa_username_password](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.registration_captcha_password](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.registration_captcha_recaptcha](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.registration_captcha_terms](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution.registration_captcha_user_creation](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution) | resource |
+| [keycloak_authentication_execution_config.registration_captcha_recaptcha](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_execution_config) | resource |
+| [keycloak_authentication_flow.browser_mfa](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_flow) | resource |
+| [keycloak_authentication_flow.registration_captcha](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_flow) | resource |
+| [keycloak_authentication_subflow.browser_mfa_forms](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_subflow) | resource |
+| [keycloak_authentication_subflow.registration_captcha_form](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/authentication_subflow) | resource |
 | [keycloak_group.level_0](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/group) | resource |
 | [keycloak_group.level_1](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/group) | resource |
 | [keycloak_group.level_2](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/group) | resource |
 | [keycloak_group.level_3](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/group) | resource |
+| [keycloak_group_admin_permissions.admin_permissions_groups](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/group_admin_permissions) | resource |
+| [keycloak_oidc_github_identity_provider.github](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/oidc_github_identity_provider) | resource |
+| [keycloak_oidc_google_identity_provider.google](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/oidc_google_identity_provider) | resource |
+| [keycloak_oidc_identity_provider.oidc](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/oidc_identity_provider) | resource |
+| [keycloak_oidc_microsoft_identity_provider.microsoft](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/oidc_microsoft_identity_provider) | resource |
 | [keycloak_openid_client.openid_clients](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_client) | resource |
+| [keycloak_openid_client_service_account_realm_role.service_account_realm_roles](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_client_service_account_realm_role) | resource |
+| [keycloak_openid_client_service_account_role.service_account_roles](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_client_service_account_role) | resource |
+| [keycloak_openid_client_user_policy.admin_permissions_service_accounts](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_client_user_policy) | resource |
 | [keycloak_openid_group_membership_protocol_mapper.group_membership_mappers](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/openid_group_membership_protocol_mapper) | resource |
 | [keycloak_realm.realm](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm) | resource |
+| [keycloak_realm_events.realm_events](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm_events) | resource |
+| [keycloak_realm_user_profile.user_profile](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/realm_user_profile) | resource |
+| [keycloak_required_action.configure_totp](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/required_action) | resource |
 | [keycloak_saml_client.saml_clients](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/saml_client) | resource |
 | [keycloak_saml_user_attribute_protocol_mapper.saml_user_attribute_mappers](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/saml_user_attribute_protocol_mapper) | resource |
 | [keycloak_user.users](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/user) | resource |
 | [keycloak_user_groups.user_groups](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/user_groups) | resource |
+| [keycloak_users_admin_permissions.admin_permissions_all_users](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/resources/users_admin_permissions) | resource |
 | [time_sleep.after_groups](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [time_sleep.after_oidc_clients](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [time_sleep.after_realm](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [time_sleep.after_saml_clients](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
 | [time_sleep.after_users](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [keycloak_openid_client.admin_permissions](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/data-sources/openid_client) | data source |
+| [keycloak_openid_client.service_account_role_clients](https://registry.terraform.io/providers/keycloak/keycloak/latest/docs/data-sources/openid_client) | data source |
 
 ## Inputs
 
