@@ -7,14 +7,14 @@ Keycloak management with OpenTofu
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9 |
-| <a name="requirement_keycloak"></a> [keycloak](#requirement\_keycloak) | >= 5.7.0 |
+| <a name="requirement_keycloak"></a> [keycloak](#requirement\_keycloak) | >= 5.9.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.12.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_keycloak"></a> [keycloak](#provider\_keycloak) | >= 5.7.0 |
+| <a name="provider_keycloak"></a> [keycloak](#provider\_keycloak) | >= 5.9.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | >= 0.12.0 |
 
 ## Modules
