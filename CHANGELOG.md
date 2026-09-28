@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.1.0...v1.2.0) (2026-09-28)
+
+
+### Features
+
+* customer realm support (self-service, MFA, IdP brokering, FGAP v2, hardening) ([#6](https://github.com/bouola/opentofu-module-keycloak/issues/6)) ([60f05e6](https://github.com/bouola/opentofu-module-keycloak/commit/60f05e6e95d7c8db5b20c7abd448426cd7c436b8))
+
 # [1.1.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.0.1...v1.1.0) (2026-04-30)
 
 
