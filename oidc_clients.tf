@@ -10,6 +10,7 @@ resource "keycloak_openid_client" "openid_clients" {
   name                      = each.value.name
   description               = each.value.description
   always_display_in_console = each.value.always_display_in_console
+  full_scope_allowed        = each.value.full_scope_allowed
 
   # Capability config
   access_type                  = each.value.access_type

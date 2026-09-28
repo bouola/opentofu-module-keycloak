@@ -301,10 +301,12 @@ variable "keycloak_saml_clients" {
 
 variable "keycloak_oidc_clients" {
   type = list(object({
-    name                         = string
-    enabled                      = optional(bool, true)
-    description                  = optional(string, null)
-    always_display_in_console    = optional(bool, null)
+    name                      = string
+    enabled                   = optional(bool, true)
+    description               = optional(string, null)
+    always_display_in_console = optional(bool, null)
+    # false = tokens only carry roles explicitly scoped to the client (null = Keycloak default: true)
+    full_scope_allowed           = optional(bool, null)
     access_type                  = optional(string, "CONFIDENTIAL")
     client_secret                = optional(string, null)
     standard_flow_enabled        = optional(bool, true)
