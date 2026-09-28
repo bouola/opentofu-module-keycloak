@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.2.0...v1.3.0) (2026-09-28)
+
+
+### Features
+
+* add client credentials grant support with `keycloak_client_secret` ([#7](https://github.com/bouola/opentofu-module-keycloak/issues/7)) ([1065ac3](https://github.com/bouola/opentofu-module-keycloak/commit/1065ac36796f33a3408b358c467ad12cf3e9d816))
+
 # [1.2.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.1.0...v1.2.0) (2026-09-28)
 
 
