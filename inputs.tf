@@ -3,14 +3,24 @@ variable "keycloak_client_id" {
   description = "Keycloak client ID for authentication"
 }
 
+variable "keycloak_client_secret" {
+  type        = string
+  default     = null
+  sensitive   = true
+  description = "Secret of keycloak_client_id for the client credentials grant (recommended: dedicated service account client, no human account)"
+}
+
 variable "keycloak_username" {
   type        = string
-  description = "Keycloak admin username for authentication"
+  default     = null
+  description = "Keycloak admin username for the password grant (legacy; not compatible with MFA on the account). Leave null with keycloak_client_secret"
 }
 
 variable "keycloak_password" {
   type        = string
-  description = "Keycloak admin password for authentication"
+  default     = null
+  sensitive   = true
+  description = "Keycloak admin password for the password grant (legacy). Leave null with keycloak_client_secret"
 }
 
 variable "keycloak_url" {
