@@ -50,13 +50,15 @@ resource "keycloak_realm" "realm" {
       strict_transport_security           = "max-age=31536000; includeSubDomains"
     }
     brute_force_detection {
-      permanent_lockout                = false
-      max_login_failures               = 30
-      wait_increment_seconds           = 60
-      quick_login_check_milli_seconds  = 1000
-      minimum_quick_login_wait_seconds = 60
-      max_failure_wait_seconds         = 900
-      failure_reset_time_seconds       = 43200
+      permanent_lockout                = var.keycloak_realm.security_defenses.brute_force_detection.permanent_lockout
+      max_login_failures               = var.keycloak_realm.security_defenses.brute_force_detection.max_login_failures
+      wait_increment_seconds           = var.keycloak_realm.security_defenses.brute_force_detection.wait_increment_seconds
+      quick_login_check_milli_seconds  = var.keycloak_realm.security_defenses.brute_force_detection.quick_login_check_milli_seconds
+      minimum_quick_login_wait_seconds = var.keycloak_realm.security_defenses.brute_force_detection.minimum_quick_login_wait_seconds
+      max_failure_wait_seconds         = var.keycloak_realm.security_defenses.brute_force_detection.max_failure_wait_seconds
+      failure_reset_time_seconds       = var.keycloak_realm.security_defenses.brute_force_detection.failure_reset_time_seconds
+      max_temporary_lockouts           = var.keycloak_realm.security_defenses.brute_force_detection.max_temporary_lockouts
+      brute_force_strategy             = var.keycloak_realm.security_defenses.brute_force_detection.brute_force_strategy
     }
   }
 

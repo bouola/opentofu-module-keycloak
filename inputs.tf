@@ -43,7 +43,21 @@ variable "keycloak_realm" {
       supported_locales = optional(list(string), ["en", "fr"])
       default_locale    = optional(string, "en")
     }), {})
-    security_defenses = optional(map(string), {})
+    security_defenses = optional(object({
+      # Brute-force detection. Temporary lockouts only by default: a permanent lockout lets
+      # anyone who knows a username lock that account out (denial of service on public realms).
+      brute_force_detection = optional(object({
+        permanent_lockout                = optional(bool, false)
+        max_login_failures               = optional(number, 30)
+        wait_increment_seconds           = optional(number, 60)
+        quick_login_check_milli_seconds  = optional(number, 1000)
+        minimum_quick_login_wait_seconds = optional(number, 60)
+        max_failure_wait_seconds         = optional(number, 900)
+        failure_reset_time_seconds       = optional(number, 43200)
+        max_temporary_lockouts           = optional(number) # null = Keycloak default
+        brute_force_strategy             = optional(string) # MULTIPLE or LINEAR, null = Keycloak default
+      }), {})
+    }), {})
 
     # Multi-factor authentication (OTP). null = not managed by this module (Keycloak defaults)
     # required = false: users may enroll OTP, asked at login once configured (built-in browser flow)
@@ -136,6 +150,16 @@ variable "keycloak_realm" {
   validation {
     condition     = contains([6, 8], try(var.keycloak_realm.mfa.otp_policy.digits, 6))
     error_message = "keycloak_realm.mfa.otp_policy.digits must be 6 or 8."
+  }
+
+  validation {
+    condition     = contains(["MULTIPLE", "LINEAR"], coalesce(try(var.keycloak_realm.security_defenses.brute_force_detection.brute_force_strategy, null), "MULTIPLE"))
+    error_message = "keycloak_realm.security_defenses.brute_force_detection.brute_force_strategy must be null, MULTIPLE or LINEAR."
+  }
+
+  validation {
+    condition     = try(var.keycloak_realm.security_defenses.brute_force_detection.max_login_failures, 30) >= 1
+    error_message = "keycloak_realm.security_defenses.brute_force_detection.max_login_failures must be at least 1."
   }
 
   validation {
