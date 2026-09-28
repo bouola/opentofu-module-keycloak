@@ -10,6 +10,7 @@ resource "keycloak_openid_client" "openid_clients" {
   name                      = each.value.name
   description               = each.value.description
   always_display_in_console = each.value.always_display_in_console
+  full_scope_allowed        = each.value.full_scope_allowed
 
   # Capability config
   access_type                  = each.value.access_type
@@ -41,6 +42,9 @@ resource "keycloak_openid_client" "openid_clients" {
   frontchannel_logout_enabled = each.value.frontchannel_logout_enabled
   frontchannel_logout_url     = each.value.frontchannel_logout_url
 
+  # Security
+  pkce_code_challenge_method = each.value.pkce_code_challenge_method
+
   depends_on = [
     keycloak_user.users
   ]
@@ -62,6 +66,11 @@ locals {
         name        = mapper.name
         claim_name  = mapper.claim_name
         full_path   = mapper.full_path
+
+        add_to_id_token            = mapper.add_to_id_token
+        add_to_access_token        = mapper.add_to_access_token
+        add_to_userinfo            = mapper.add_to_userinfo
+        add_to_token_introspection = mapper.add_to_token_introspection
       }
     ]
   ])
@@ -77,6 +86,34 @@ resource "keycloak_openid_group_membership_protocol_mapper" "group_membership_ma
   claim_name = each.value.claim_name
   name       = each.value.name
   full_path  = each.value.full_path
+
+  add_to_id_token            = each.value.add_to_id_token
+  add_to_access_token        = each.value.add_to_access_token
+  add_to_userinfo            = each.value.add_to_userinfo
+  add_to_token_introspection = each.value.add_to_token_introspection
+
+  depends_on = [
+    time_sleep.after_oidc_clients
+  ]
+}
+
+# Keycloak stores the alias of the external IdP used to log in in the "identity_provider" user session note
+resource "keycloak_openid_user_session_note_protocol_mapper" "identity_provider_claim" {
+  for_each = {
+    for openid_client in var.keycloak_oidc_clients :
+    openid_client.name => openid_client if openid_client.identity_provider_claim
+  }
+  realm_id  = keycloak_realm.realm.id
+  client_id = keycloak_openid_client.openid_clients[each.key].id
+  name      = "identity-provider-mapper"
+
+  claim_name                 = "identity_provider"
+  claim_value_type           = "String"
+  session_note               = "identity_provider"
+  add_to_id_token            = true
+  add_to_access_token        = true
+  add_to_userinfo            = true
+  add_to_token_introspection = true
 
   depends_on = [
     time_sleep.after_oidc_clients
