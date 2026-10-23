@@ -20,7 +20,7 @@ experimental = true
 lockfile = true
 
 [hooks.postinstall]
-script = """
+run = """
 #!/usr/bin/env bash
 pre-commit install --install-hooks
 """
