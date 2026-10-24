@@ -339,7 +339,8 @@ variable "keycloak_oidc_clients" {
     frontchannel_logout_url         = optional(string, null)
     pkce_code_challenge_method      = optional(string, null) # "S256" for public clients (SPA, mobile)
 
-    # Roles granted to the client service account (requires service_accounts_enabled = true)
+    # Roles granted to the client service account (requires service_accounts_enabled = true), also added as role
+    # scope mappings of the client so that they stay in its tokens with full_scope_allowed = false.
     # Client roles keyed by the client_id owning them, e.g. { "realm-management" = ["manage-users", "view-users"] }
     service_account_roles       = optional(map(list(string)), {})
     service_account_realm_roles = optional(list(string), [])
