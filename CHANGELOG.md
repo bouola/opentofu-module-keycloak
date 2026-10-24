@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.3.0...v1.4.0) (2026-10-24)
+
+
+### Features
+
+* scope service account roles to their client and require provider 5.10 ([06409e3](https://github.com/bouola/opentofu-module-keycloak/commit/06409e362767a7054841afdc0b402e88fa2a7fde))
+
 # [1.3.0](https://github.com/bouola/opentofu-module-keycloak/compare/v1.2.0...v1.3.0) (2026-09-28)
 
 
